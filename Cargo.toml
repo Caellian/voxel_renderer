@@ -1,0 +1,57 @@
+[package]
+name = "earth_oxide"
+version = "0.1.0"
+authors = ["Tin Svagelj <tin.svagelj@live.com>"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "earth_oxide"
+path = "src/bin/client.rs"
+
+[features]
+default = []
+authoring = []
+
+[dependencies]
+winit = "0.27"
+wgpu = "0.14"
+pollster = "0.2"
+image = { version = "0.24", default-features = false, features = ["png"] }
+
+num = "0.4"
+rand = "0.8"
+glam = {version = "0.22", features = ["bytemuck", "rand"]}
+petgraph = "0.6"
+byteorder = "1.4"
+bytemuck = { version = "1.4", features = ["derive"] }
+fasthash = "0.4"
+
+bevy_ecs = "0.9"
+
+macros = { path = "./macros", features = ["glam-types"] }
+enum-kinds = "0.5"
+num_enum = "0.5"
+serde_repr = "0.1"
+
+serde = { version = "1.0", features=["derive"] }
+toml = "0.5"
+bincode = "2.0.0-rc"
+
+tracing = { version = "0.1", features = ["log"] }
+tracing-subscriber = "0.3"
+thiserror = "1.0"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+console_error_panic_hook = "0.1"
+tracing-wasm = "0.2"
+wgpu = { version = "0.14", features = ["webgl"]}
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = { version = "0.3", features = [
+    "Document",
+    "Window",
+    "Element",
+]}
